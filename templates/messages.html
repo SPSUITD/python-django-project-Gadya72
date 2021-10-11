@@ -1,0 +1,18 @@
+{% for msg in messages %}
+    {% ifchanged msg.pub_date.date %}{{ msg.pub_date.date }}<br>{% endifchanged %}
+    {% ifchanged msg.author %}
+        <b>{{ msg.author }} {{ msg.pub_date.time }}</b><br>
+    {% endifchanged %}
+    {{ msg.text }}
+    <br>
+{% endfor %}
+<form action="{% url 'new_message' %}" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="user" maxlength="500" required="" id="id_user" value={{ author.pk }}>
+    <input type="text" name="text" maxlength="500" required="" id="id_text">
+    <input type="submit"></input>
+</form>
+<br>
+<br>
+<br>
+<a href="{% url 'index' %}">На главную</a>

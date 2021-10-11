@@ -1,0 +1,13 @@
+<p><b>Кому напишем?</b></p>
+<form action="{% url 'new_message' %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_ul }}
+    <p><input type="submit"></p>
+</form>
+Диалоги
+{% for msg_user in messages %}
+    <br>
+    <a href="{% url 'user-page' msg_user.username %}">
+        {{ msg_user.username }}
+    </a>
+{% endfor %}
